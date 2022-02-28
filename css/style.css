@@ -1,7 +1,7 @@
 body {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr); 
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr); 
     
     /* background-image: url("https://i.imgur.com/TEcD3wP.png"); */
     background-image: url("./img/fry-prof-bender.png");
@@ -10,8 +10,9 @@ body {
     background-size: contain;
     grid-template-areas:
         "h h h"
-        "l l l"
-        ". a ."
+        "w w w"
+        ". l ."
+        "g g g"
 }
 
 #background {
@@ -43,9 +44,20 @@ h3 {
     font-size: 20;
 }
 
+.word {
+    display: flex;
+    grid-area: w;
+    align-items: center;
+    justify-content: center;
+
+}
+
 .letters {
+    display: flex;
     text-align: center;
-    grid-area: a;
+    justify-content: center;
+    grid-area: l;
+    font-size: 60px;
 
 }
 
@@ -56,22 +68,36 @@ h3 {
     margin-right: auto;    
     width: 100%;
     flex-direction: row;
-    grid-area: l;
+    grid-area: g;
     align-items: center;
     justify-content: center;
 
 } 
 
-.rectangle {
-    width: 100px;
-    height: 100px;
+
+.boxes {
+    width: 50px;
+    height: 50px;
     background:white;
     border: 5px solid black;
-    /* grid-template-columns: 2/3;
-    grid-template-rows: 2/3; */
+}
+
+.lives {
+    width: 50px;
+    height: 50px;
+    background:white;
+    border: 5px solid black;
+    border-radius: 50%;
 }
 
 
+#lifeOne, #lifeTwo, #lifeThree, #lifeFour, #lifeFive {
+    background: green;
+}
+
+#lifeSix {
+    background: red;
+}
 
 
 
