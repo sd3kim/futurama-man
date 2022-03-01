@@ -1,101 +1,80 @@
 // Constants
-const mainEl = document.query
+const mainEl = document.querySelector("main");
+const messageBoxEl = document.querySelector(".message-box");
+const msgEl = document.querySelector(".message-box > h3");
+const playAgainEl = document.querySelector(".message-box > button");
 
 // Getting words for game
 const wordList = [
-    {word: "PLANET EXPRESS",
-    clue: "COMPANY OWNED BY PROFESSOR FARNSWORTH"},
+    {word: "BENDER",
+    hint: "CHEIF OF PLANET EXPRESS"},
 
     {word: "LEELA",
-    clue: "CAPTAIN OF THE PLANET EXPRESS SHIP"},
+    hint: "CAPTAIN OF THE PLANET EXPRESS SHIP"},
 
     {word: "ORANGE",
-    clue: "COLOUR OF FRY'S HAIR"}
+    hint: "COLOUR OF FRY'S HAIR"},
+
+    {word: "SLURM",
+    hint: "NAME OF FRY'S FAVOURITE DRINK"}
 ];
 
-// app's state (variables)
+// start with default first word
+const currentWord = wordList[1].word;
+console.log(currentWord);
 
-let lose = numGuesses > maxGuesses;
-let maxGuesses = 6;
+// create loop to equate to the number of boxes and length of word
+function addBoxes() {
+    for(let i = 0; i < currentWord.length-1; i++) {
+        createBox();
+    };
+};
+
+function createBox() {
+    const newBox = document.createElement("div");
+    // adds boxes class to div that is created
+    newBox.classList.add("boxes", "boxes-letters");
+    document.querySelector(".word").appendChild(newBox);
+};
+
+addBoxes();
+
+// keyboard down, is the character in the current word (two small functions)
+
+const keyDown = document.addEventListener("keydown", checkLetter);
+
+// index of letter is shown in the string
+// if index of letter = -1; it's not in the string
+// if +# = the position of the letter in the string
+function checkLetter(e) {
+    console.log(e);
+    const indexOfLetter = currentWord.indexOf(e.key.toUpperCase());
+    console.log(indexOfLetter);
+};
+
+// // app's state (variables)
+// let lose = numGuesses > maxGuesses;
+// let maxGuesses = 6;
+
 
 // cached element references
 
+
 // event listeners
 
-// functions
-
-function init() {
-    
-
-    render();
-}
-
-function render() {
-
-}
 
 
+// // functions
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const mainEl = document.querySelector("main");
-
-// const gameList = [
-//     {word: "Planet Express",
-//     question: "The company owned by Professor Farnsworth"},
-//     {word: ""
-
-//     }
-
-// ]
-
-// function guessedLetter(letter) {
-//     state.currenGuessMatrix[state.wordIdx][state.letterIdx] = letter.toUpperCase()
+// function getLetter() {
+//     const 
 // }
 
-// document.addEventListener("keydown", function (e) {
-//     if(e.keyCode >= 65 && e.keyCode <= 90) {
-//         console.log(e);
-//     } else if (e.key === "Backspace") {
-//         console.log("backspace");
-//     }
-// })
 
-// // intialize to refresh game then after, render the game
 
-// function init() {
-//     state.winningWord = null;
-//     state.letterIdx = 0;
-//     state.wordIdx = 0;
-//     state.currentGuessMatrix.forEach((row, rowIdx) => {
-//         row.forEach(
-//             (letter, letterIdx) =>
-//                 (state.currenGuessMatrix[rowIdx][letterIdx] = null)
-//         );
-//     }
 
-//     render();
-// }
 
-// function render() {
-//     let rowIdx = 0;
-//     for (let row of mainEl.children) {
-//         let letterIdx = 0;
-//         for(let letter of row.children) {
-//             letter.textContent = state.currentGuessMatrix[rowIdx][letterIdx];
-//             letterIdx++;
 
-//         }
-//     }
-// }
+
+
+
