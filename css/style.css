@@ -51,12 +51,11 @@ h3 {
 }
 
 .letters {
-    /* display: flex; */
     margin-left: auto;
     margin-right: auto;  
+    align-self: center;
     grid-area: l;
     font-size: 5vh;
-
 }
 
 /* Game Board that shows lives*/
@@ -80,6 +79,13 @@ h3 {
     border: 5px solid black;
 }
 
+.word > div {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .lives {
     width: 50px;
     height: 50px;
@@ -97,13 +103,13 @@ h3 {
 }
 
 .word > div {
-    background-color: rgb(128, 60, 168);
+    background-color: rgb(255, 255, 255);
 }
 
 .letters {
-    background-color: rgb(128, 60, 168);
+    background-color: rgb(255, 255, 255);
     height: 12vh;
-    opacity: 0.8;
+    opacity: 0.7;
     text-align: center;
 }
 
