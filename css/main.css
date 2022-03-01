@@ -3,7 +3,7 @@ body {
     height: 100vh;
     width: 100vw;
 
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(3, 2fr);
     grid-template-rows: repeat(4, 1fr);
 
@@ -11,13 +11,28 @@ body {
         "h h h"
         "w w w"
         ". a ."
-        "g g g";
+        "g g g"; */
 
     background-image: url("https://i.imgur.com/ideNviq.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     font-family: 'Bungee Inline', Arial;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    grid-template-rows: repeat(6, 2fr);
+
+    grid-template-areas:
+        "h h h"
+        "w w w"
+        ". . ."
+        ". a ."
+        ". . ."
+        "g g g";
+
 }
 
 .title {
@@ -43,13 +58,6 @@ h3 {
     font-size: 20;
 }
 
-.word {
-    display: flex;
-    grid-area: w;
-    align-items: center;
-    justify-content: center;
-
-}
 
 /* Game Board that shows lives*/
 .game-container {
@@ -64,12 +72,19 @@ h3 {
 
 } 
 
-
 .boxes {
     width: 50px;
     height: 50px;
     background:white;
     border: 5px solid black;
+}
+
+.word {
+    display: flex;
+    grid-area: w;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .word > div {
@@ -79,6 +94,21 @@ h3 {
     justify-content: center;
     background-color: rgb(255, 255, 255);
 }
+
+
+.alphabet {
+    /* font-family: 'Bungee Inline', Arial; */
+    grid-area: a;
+    background-color: rgb(255, 255, 255);
+    font-size: 4vh;
+    height: 10vh;
+    opacity: 0.7;
+    margin-left: auto;
+    margin-right: auto;  
+    align-self: center;
+    text-align: center;
+}
+
 
 .lives {
     width: 50px;
@@ -94,20 +124,6 @@ h3 {
 
 #lifeSix {
     background: red;
-}
-
-
-.alphabet {
-    /* font-family: 'Bungee Inline', Arial; */
-    grid-area: a;
-    background-color: rgb(255, 255, 255);
-    font-size: 5vh;
-    height: 12vh;
-    opacity: 0.7;
-    margin-left: auto;
-    margin-right: auto;  
-    align-self: center;
-    text-align: center;
 }
 
 button {
