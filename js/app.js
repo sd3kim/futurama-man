@@ -8,7 +8,10 @@ const wordList = [
 
     {word: "ORANGE",
     clue: "COLOUR OF FRY'S HAIR"}
-]
+];
+
+// Constants
+
 
 
 

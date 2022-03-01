@@ -1,20 +1,27 @@
 body {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr); 
+    /* grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);  */
+    grid-template-columns: repeat(3, 500px);
+    grid-template-rows: repeat(3, 400px);
 
     grid-template-areas:
         "h h h"
         "w w w"
         ". l ."
-        "g g g"
+        "g g g";
+
+
 }
 
-#background-photo {
-    background-image: url("https://i.imgur.com/TEcD3wP.png");
-    background-position: bottom 100px right 100px;
+.background {
+    display: grid;
+}
+
+.background>img {
     background-size: cover;
 }
+
 
 .title {
     display: grid;
@@ -56,7 +63,7 @@ h3 {
 
 }
 
-/* Game Board */
+/* Game Board that shows lives*/
 .game-container {
     display: flex;
     margin-left: auto;
