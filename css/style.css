@@ -4,8 +4,8 @@ body {
     width: 100vw;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 2fr);
+    grid-template-rows: repeat(4, 1fr);
 
     grid-template-areas:
         "h h h"
@@ -51,20 +51,20 @@ h3 {
 }
 
 .letters {
-    display: flex;
-    text-align: center;
-    justify-content: center;
+    /* display: flex; */
+    margin-left: auto;
+    margin-right: auto;  
     grid-area: l;
-    font-size: 60px;
+    font-size: 5vh;
 
 }
 
 /* Game Board that shows lives*/
 .game-container {
+    width: 100%;
     display: flex;
     margin-left: auto;
     margin-right: auto;    
-    width: 100%;
     flex-direction: row;
     grid-area: g;
     align-items: center;
@@ -88,7 +88,6 @@ h3 {
     border-radius: 50%;
 }
 
-
 #lifeOne, #lifeTwo, #lifeThree, #lifeFour, #lifeFive {
     background: green;
 }
@@ -97,8 +96,16 @@ h3 {
     background: red;
 }
 
+.word > div {
+    background-color: rgb(128, 60, 168);
+}
 
-
+.letters {
+    background-color: rgb(128, 60, 168);
+    height: 12vh;
+    opacity: 0.8;
+    text-align: center;
+}
 
 
 
