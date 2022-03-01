@@ -44,18 +44,21 @@ h1 {
     /* font-family: 'Bungee Inline', Arial; */
     text-align: center;
     font-size: 50px;
+    margin: 10px;
 }
 
 h2 {
     /* font-family: 'Bungee Inline', Arial; */
     text-align: center;
     font-size: 30px;
+    margin: 10px;
 }
 
 h3 {
     /* font-family: Arial; */
     text-align: center;
     font-size: 20;
+    margin: 20px;
 }
 
 
