@@ -2,12 +2,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr); 
-    
-    /* background-image: url("https://i.imgur.com/TEcD3wP.png"); */
-    background-image: url("./img/fry-prof-bender.png");
 
-    background-position: center;
-    background-size: contain;
     grid-template-areas:
         "h h h"
         "w w w"
@@ -15,10 +10,10 @@ body {
         "g g g"
 }
 
-#background {
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
+#background-photo {
+    background-image: url("https://i.imgur.com/TEcD3wP.png");
+    background-position: bottom 100px right 100px;
+    background-size: cover;
 }
 
 .title {

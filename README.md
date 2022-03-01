@@ -4,6 +4,7 @@
 Futurama-man -- a play on the original Hangman game with a 'Futurama' theme. 
 
 **Screenshots**
+![First screenshot](./img/screenshot-1.png)
 
 **Technologies Used** 
 Javascript, HTML, CSS
