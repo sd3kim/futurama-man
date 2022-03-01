@@ -1,7 +1,7 @@
 # Project-1
 
 **Game-title**
-Futurama-man -- a play on the original Hangman game with a 'Futurama' theme. 
+Futurama-man -- a play on the original Hangman game with a 'Futurama' theme. Hangman involves a player guessing a word (represented by a row of dashes) given a hint. The player will guess letter by letter, with correct a letter showing in the dashes, and incorrect an letter removing a life. If the player does not guess the word correctly within six guesses, the game is over and the player has lost.
 
 **Screenshots**
 ![First screenshot](./img/screenshot-1.png)

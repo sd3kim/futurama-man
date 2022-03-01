@@ -10,7 +10,7 @@ body {
     grid-template-areas:
         "h h h"
         "w w w"
-        ". l ."
+        ". a ."
         "g g g";
 
     background-image: url("https://i.imgur.com/ideNviq.png");
@@ -50,14 +50,6 @@ h3 {
 
 }
 
-.letters {
-    margin-left: auto;
-    margin-right: auto;  
-    align-self: center;
-    grid-area: l;
-    font-size: 5vh;
-}
-
 /* Game Board that shows lives*/
 .game-container {
     width: 100%;
@@ -84,6 +76,7 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgb(255, 255, 255);
 }
 
 .lives {
@@ -102,14 +95,16 @@ h3 {
     background: red;
 }
 
-.word > div {
-    background-color: rgb(255, 255, 255);
-}
 
-.letters {
+.alphabet {
+    grid-area: a;
     background-color: rgb(255, 255, 255);
+    font-size: 5vh;
     height: 12vh;
     opacity: 0.7;
+    margin-left: auto;
+    margin-right: auto;  
+    align-self: center;
     text-align: center;
 }
 

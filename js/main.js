@@ -1,3 +1,5 @@
+// Constants
+
 // Getting words for game
 const wordList = [
     {word: "PLANET EXPRESS",
@@ -10,13 +12,26 @@ const wordList = [
     clue: "COLOUR OF FRY'S HAIR"}
 ];
 
-// Constants
+// app's state (variables
 
+let lose = numGuesses > maxGuesses;
+let maxGuesses = 6;)
 
+// cached element references
 
+// event listeners
 
+// functions
 
+function init() {
+    
 
+    render();
+}
+
+function render() {
+    
+}
 
 
 
