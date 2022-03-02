@@ -1,6 +1,6 @@
 // Constants
 const mainEl = document.querySelector("main");
-const messageBoxEl = document.querySelector(".message-box");
+const msgBoxEl = document.querySelector(".message-box");
 const msgEl = document.querySelector(".message-box > h3");
 const playAgainEl = document.querySelector(".message-box > button");
 const hintEl = document.querySelector(".title > h3");
@@ -88,7 +88,10 @@ function registerLetter(e) {
             }
 
         }
-    } else {
+        msgEl.textContent = `Why yes, there is a '${letter}' in the word`;
+        msgBoxEl.style.display = "block";
+
+    } else if (indexOfLetter < 0) {
         console.log("wrong");
         for(let letterEl of alphaEl.children) {
             if(letterEl.textContent !== letter) {
@@ -96,9 +99,21 @@ function registerLetter(e) {
             }
 
         }
+        msgEl.textContent = `No, there is no '${letter}' in the word`;
+        msgBoxEl.style.display = "block";
     }
 };
 
+playAgainEl.addEventListener("click", init);
+
+function init() {
+    msgEl.textContent = "";
+    msgBoxEl.style.display = "none";
+}
+
+function render() {
+
+}
 
 
 
@@ -118,57 +133,7 @@ function registerLetter(e) {
     //     }
     // }
 
-
-
-
-
-
-
-// Change colour of alphabet 
-// function changeColour(){
-//     const 
 // }
-
-
-// Check if letter matches current (winning) word
-
-// function checkWin(letter) {
-//     if 
-
-
-//     if(registerLetter >= 0) {
-//         const addLetter = document.querySelector(".boxes").innerHTML = "A";
-
-//         // let letter at the at index be displayed in the boxes and highlight letter green
-//     } else {
-//         // remove a life and highlight letter red
-//     }; 
-// };
-
-// checkWin();
-
-// const addLetter = boxesEl.innerHTML = "A";
-
-
-// // app's state (variables)
-// let lose = numGuesses > maxGuesses;
-// let maxGuesses = 6
-;
-
-
-// cached element references
-
-
-// event listeners
-
-
-
-// // functions
-
-// function getLetter() {
-//     const 
-// }
-
 
 
 // TO-DO:
