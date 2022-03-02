@@ -5,6 +5,7 @@ const msgEl = document.querySelector(".message-box > h3");
 const playAgainEl = document.querySelector(".message-box > button");
 const hintEl = document.querySelector(".title > h3");
 const boxesEl = document.querySelector(".boxes");
+const wordEl = document.querySelector(".word");
 
 // Getting words for game
 const wordBank = [
@@ -71,17 +72,34 @@ function registerLetter(e) {
     const currentLetterKeyCode = e.keyCode;
     const currentLetter = String.fromCharCode(currentLetterKeyCode);
 
-    for(let i = 0; i < winningWord.length; i++) {
-        if(winningWord.includes(currentLetter)) {
-            // works but want to add letter to correct position
-            boxesEl.innerHTML = currentLetter;
-        }
-        else {
-            return;
-        }
+    console.log(indexOfLetter);
+
+    if (indexOfLetter >= 0) {
+        wordEl.children[indexOfLetter].textContent = e.key;
+    } if (indexOfLetter === indexOfLetter) {
+        wordEl.children[indexOfLetter].textContent = e.key;
+    } else {
+        console.log("wrong");
     }
 
+
+
+
+    // for(let i = 0; i < winningWord.length; i++) {
+    //     if(winningWord.includes(currentLetter)) {
+    //         // find correct position
+    //         boxesEl.innerHTML = currentLetter;
+    //     }
+    //     else {
+    //         return;
+    //     }
+    // }
+
 };
+
+
+
+
 
 // Change colour of alphabet 
 // function changeColour(){
@@ -129,6 +147,14 @@ function registerLetter(e) {
 // }
 
 
+
+// TO-DO:
+// 1) get letter to appear in correct box
+// 2) change colour of letter when correct or incorrect letter is guessed
+// 3) remove life (change colour of circle to red) if incorrect letter is guessed
+// 4) display winning or losing message
+// 5) get functioning reset button (render function)
+// create init function
 
 
 
