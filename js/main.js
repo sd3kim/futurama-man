@@ -3,9 +3,10 @@ const mainEl = document.querySelector("main");
 const messageBoxEl = document.querySelector(".message-box");
 const msgEl = document.querySelector(".message-box > h3");
 const playAgainEl = document.querySelector(".message-box > button");
+const hintEl = document.querySelector(".title > h3");
 
 // Getting words for game
-const wordList = [
+const wordBank = [
     {word: "BENDER",
     hint: "CHEIF OF PLANET EXPRESS"},
 
@@ -21,13 +22,24 @@ const wordList = [
     {word: "MARS",
     hint: "WHAT PLANET DOES AMY'S PARENTS LIVE ON?"},
 
+    {word: "NIBBLER",
+    hint: "WHAT IS THE NAME OF LEELA'S PET?"}
 
 ];
 
-// generates a random number between 1 and the length of the wordList bank to choose which word will be guessed
+// generates a random number between 1 and the length of the wordBank bank to choose which word will be guessed
 
-const winningWord = wordList[Math.floor(Math.random() * wordList.length)].word;
-console.log(winningWord);
+const winningWord = wordBank[Math.floor(Math.random() * wordBank.length)].word;
+console.log(winningWord); 
+
+// winningWordIdx gets index of winning word to select corresponding hint
+const winningWordIdx = wordBank.findIndex(x => x.word === winningWord);
+
+// Updates hint corresponding with winning word
+const winningHint = wordBank[winningWordIdx].hint;
+console.log(winningHint);
+hintEl.innerHTML = winningHint;
+
 
 
 
@@ -72,8 +84,6 @@ function checkWin() {
 };
 
 checkWin();
-
-
 
 
 
