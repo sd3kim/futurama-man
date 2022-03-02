@@ -4,6 +4,7 @@ const messageBoxEl = document.querySelector(".message-box");
 const msgEl = document.querySelector(".message-box > h3");
 const playAgainEl = document.querySelector(".message-box > button");
 const hintEl = document.querySelector(".title > h3");
+const boxesEl = document.querySelector(".boxes");
 
 // Getting words for game
 const wordBank = [
@@ -40,9 +41,6 @@ const winningHint = wordBank[winningWordIdx].hint;
 console.log(winningHint);
 hintEl.innerHTML = winningHint;
 
-
-
-
 // create loop to equate to the number of boxes and length of word
 function addBoxes() {
     for(let i = 0; i < winningWord.length-1; i++) {
@@ -61,35 +59,60 @@ addBoxes();
 
 // keyboard down, is the character in the current word (two small functions)
 
-const keyDown = document.addEventListener("keydown", checkLetter);
+const keyDown = document.addEventListener("keydown", registerLetter);
+
 
 // index of letter is shown in the string
 // if index of letter = -1; it's not in the string
 // if +# = the position of the letter in the string
-function checkLetter(e) {
+function registerLetter(e) {
     console.log(e);
     const indexOfLetter = winningWord.indexOf(e.key.toUpperCase());
-    console.log(indexOfLetter);
+    const currentLetterKeyCode = e.keyCode;
+    const currentLetter = String.fromCharCode(currentLetterKeyCode);
+
+    for(let i = 0; i < winningWord.length; i++) {
+        if(winningWord.includes(currentLetter)) {
+            // works but want to add letter to correct position
+            boxesEl.innerHTML = currentLetter;
+        }
+        else {
+            return;
+        }
+    }
+
 };
+
+// Change colour of alphabet 
+// function changeColour(){
+//     const 
+// }
+
 
 // Check if letter matches current (winning) word
 
-function checkWin() {
-    if(checkLetter >= 0) {
-        const addLetter = document.querySelector(".boxes").innerHTML = "A";
-        // let letter at the at index be displayed in the boxes and highlight letter green
-    } else {
-        // remove a life and highlight letter red
-    }; 
-};
+// function checkWin(letter) {
+//     if 
 
-checkWin();
 
+//     if(registerLetter >= 0) {
+//         const addLetter = document.querySelector(".boxes").innerHTML = "A";
+
+//         // let letter at the at index be displayed in the boxes and highlight letter green
+//     } else {
+//         // remove a life and highlight letter red
+//     }; 
+// };
+
+// checkWin();
+
+// const addLetter = boxesEl.innerHTML = "A";
 
 
 // // app's state (variables)
 // let lose = numGuesses > maxGuesses;
-// let maxGuesses = 6;
+// let maxGuesses = 6
+;
 
 
 // cached element references
