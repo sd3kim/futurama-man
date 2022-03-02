@@ -6,6 +6,8 @@ const playAgainEl = document.querySelector(".message-box > button");
 const hintEl = document.querySelector(".title > h3");
 const boxesEl = document.querySelector(".boxes");
 const wordEl = document.querySelector(".word");
+const alphaEl = document.querySelector(".alphabet");
+const letterEl = document.querySelector(".letter");
 
 // Getting words for game
 const wordBank = [
@@ -71,18 +73,39 @@ function registerLetter(e) {
     const indexOfLetter = winningWord.indexOf(e.key.toUpperCase());
     const currentLetterKeyCode = e.keyCode;
     const currentLetter = String.fromCharCode(currentLetterKeyCode);
+    const letter = e.key.toUpperCase();
 
     console.log(indexOfLetter);
 
     if (indexOfLetter >= 0) {
         wordEl.children[indexOfLetter].textContent = e.key;
-    } if (indexOfLetter === indexOfLetter) {
-        wordEl.children[indexOfLetter].textContent = e.key;
+        // if registered letter exists in alphabet
+
+        // for of loop
+        for(let letterEl of alphaEl.children) {
+            if(letterEl.textContent === letter) {
+                letterEl.style.color = "green";
+            }
+
+        }
     } else {
         console.log("wrong");
+        for(let letterEl of alphaEl.children) {
+            if(letterEl.textContent !== letter) {
+                letterEl.style.color = "red";
+            }
+
+        }
     }
+};
 
 
+
+
+// const correctLetter = [];
+// function previouslyGuessed(e){
+//     for(let i = 0; i < )
+// }
 
 
     // for(let i = 0; i < winningWord.length; i++) {
@@ -95,7 +118,7 @@ function registerLetter(e) {
     //     }
     // }
 
-};
+
 
 
 
@@ -149,7 +172,7 @@ function registerLetter(e) {
 
 
 // TO-DO:
-// 1) get letter to appear in correct box
+// 1) get letter to appear in correct box [DONE]
 // 2) change colour of letter when correct or incorrect letter is guessed
 // 3) remove life (change colour of circle to red) if incorrect letter is guessed
 // 4) display winning or losing message
