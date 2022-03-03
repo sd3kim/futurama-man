@@ -8,6 +8,14 @@ const boxesEl = document.querySelector(".boxes");
 const wordEl = document.querySelector(".word");
 const alphaEl = document.querySelector(".alphabet");
 const letterEl = document.querySelector(".letter");
+const livesEl = document.querySelector(".lives");
+const lifeEl = document.querySelector(".life");
+
+const previousGuesses = new Array;
+const wordArray = new Array;
+const maxGuesses = 6;
+let numOfWrongGuesses = 0;
+
 
 // Getting words for game
 const wordBank = [
@@ -62,58 +70,209 @@ addBoxes();
 
 // keyboard down, is the character in the current word (two small functions)
 
-const keyDown = document.addEventListener("keydown", registerLetter);
+const keyDown = document.addEventListener("keydown", main);
 
 
-// index of letter is shown in the string
-// if index of letter = -1; it's not in the string
-// if +# = the position of the letter in the string
-function registerLetter(e) {
-    console.log(e);
+
+function main(e) { 
     const indexOfLetter = winningWord.indexOf(e.key.toUpperCase());
     const currentLetterKeyCode = e.keyCode;
     const currentLetter = String.fromCharCode(currentLetterKeyCode);
-    const letter = e.key.toUpperCase();
+    const currentGuessedLetter = e.key.toUpperCase();
 
-    console.log(indexOfLetter);
+    const isGuessed = checkIfGuessed(currentGuessedLetter);
+
+
+    if (isGuessed === true) {
+        msgEl.textContent = `'${currentGuessedLetter}' has already been guessed. Try a different letter`;
+        msgBoxEl.style.display = "block";
+        return;
+    } 
+
+    const isLetterPresent = isLetterInWinningWord(currentGuessedLetter);
+    const idxOfSameLetters = sameLettersExist(currentGuessedLetter);
+
+    // const characterIsALetter = isCharacterALetter(currentLetterKeyCode);
+
+    // checks if input is a letter. If not, returns and displays message but no life is lost
+    if ((e.keyCode >= 65 && e.keyCode <= 90) === false) {
+        msgEl.textContent = `'${currentGuessedLetter}' is not a letter`;
+        msgBoxEl.style.display = "block";
+        return;
+    } else if (isLetterPresent === false) {
+        removeLife();
+        msgEl.textContent = `'${currentGuessedLetter}' is not a letter in the word`;
+        msgBoxEl.style.display = "block";
+    } 
+
 
     if (indexOfLetter >= 0) {
         wordEl.children[indexOfLetter].textContent = e.key;
         // if registered letter exists in alphabet
-
+        if (idxOfSameLetters === true) {
+            for(let element of idxOfSameLetters) {
+                wordEl[idxOfSameLetters].textContent = e.key;
+            }
+        }
         // for of loop
         for(let letterEl of alphaEl.children) {
-            if(letterEl.textContent === letter) {
+            if(letterEl.textContent === currentGuessedLetter) {
                 letterEl.style.color = "green";
             }
 
         }
-        msgEl.textContent = `Why yes, there is a '${letter}' in the word`;
+        msgEl.textContent = `Why yes, there is a '${currentGuessedLetter}' in the word`;
         msgBoxEl.style.display = "block";
+    } 
+} 
 
-    } else if (indexOfLetter < 0) {
-        console.log("wrong");
-        for(let letterEl of alphaEl.children) {
-            if(letterEl.textContent !== letter) {
-                letterEl.style.color = "red";
-            }
 
+// if(sameLettersExist === true) {
+//     wordEl.children[sameLettersExist].textContent = e.key;
+//     console.log(sameLettersExist);
+// } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // if (isLetterPresent <= maxGuesses) {
+    //     isLetterPresentCounter++;
+    //     // function to colour incorrect letter in alph
+    //     // function to colour one life red
+    //     removeLife();
+    //     if(isLetterPresent === false) {
+    //         removeLife();
+    //     )
+
+
+
+
+
+    // function to see if isGuessed is a letter in the winning word
+
+
+
+    // if(e.keyCode > 64 && e.keyCode < 91) {
+    //     const correctLetter = false;
+    //     const previouslyEnteredLetter = false;
+     
+
+    
+    //     if (previouslyEnteredLetter === true) {
+    //         previousGuesses.push(currentGuessedLetter);
+    //         console.log(previousGuesses);
+
+    //         for (let i = 0; i < wordArray.length; i++) {
+    //             if(currentGuessedLetter === wordArray[i]) {
+    //                 correctLetter = true;
+    //                 wordEl.children[indexOfLetter].textContent = e.key;
+    //             }
+    //             console.log("ok");
+    //         }
+    //     }
+
+    // }
+
+
+// function isCharacterALetter(currentLetterKeyCode) {
+//     if (e.keyCode >= 65 && e.keyCode <= 90) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
+
+// checks if a letter was already guessed
+function checkIfGuessed(currentGuessedLetter) {
+    for(let i = 0; i < previousGuesses.length; i++) {
+        if(currentGuessedLetter === previousGuesses[i]) {
+            return true;
         }
-        msgEl.textContent = `No, there is no '${letter}' in the word`;
-        msgBoxEl.style.display = "block";
     }
-};
-
-playAgainEl.addEventListener("click", init);
-
-function init() {
-    msgEl.textContent = "";
-    msgBoxEl.style.display = "none";
+    return false;
 }
 
-function render() {
-
+// function to see if a letter is in the winning word
+// if a variable is global, don't need to include it as a param in a function
+function isLetterInWinningWord(letter) {
+    for (let i = 0; i < winningWord.length; i++) {
+        if(winningWord[i] === letter) {
+            return true;
+        }
+    }
+    return false;
 }
+
+function removeLife() {
+    // debugger;
+    // lifeEl.style.backgroundColor = "red";
+    // change name of numOfWrongGuesses
+    numOfWrongGuesses++;
+    for(let i = 0; i < numOfWrongGuesses; i++) {
+        livesEl.children[i].style.backgroundColor = "red";
+        if(numOfWrongGuesses > 6) {
+            msgEl.textContent = 'You ran out of lives.';
+            msgBoxEl.style.display = "block";
+            // quit game
+        }
+    }
+}
+
+
+function sameLettersExist(letter) {
+    const idxOfTwoLetters = [];
+    let i = -1;
+
+    while((i = winningWord.indexOf(letter, i+1)) >= 0) idxOfTwoLetters.push(i);
+        return idxOfTwoLetters;
+}
+
+
+
+    // } if (isCharacterALetter(e.key) === true) {
+    //     console.log("NOT A LETTER");
+    //     msgEl.textContent = `'${currentGuessedLetter}' is not a letter`;
+    //     msgBoxEl.style.display = "block";
+    //     } else if(indexOfLetter >= 0) {
+    //     findLettersInWinningWord;
+    // }
+
+
+
+
+
+
+    
+
+
+// function findAndRegisterLetters(e) {
+//     for(let i = 0; i < winningWord.length; i++) {
+//         if(e.key.toUpperCase() === winningWord[i]) {
+
+//         }
+//     }
+// }
+
+// playAgainEl.addEventListener("click", init);
+
+// function init() {
+//     msgEl.textContent = "";
+//     msgBoxEl.style.display = "none";
+// }
+
+
+// function render() {
+
+// }
 
 
 
@@ -150,3 +309,52 @@ function render() {
 
 
 
+
+
+
+
+// // index of letter is shown in the string
+// // if index of letter = -1; it's not in the string
+// // if +# = the position of the letter in the string
+// function registerLetter(e) {
+//     console.log(e);
+//     const indexOfLetter = winningWord.indexOf(e.key.toUpperCase());
+//     const currentLetterKeyCode = e.keyCode;
+//     const currentLetter = String.fromCharCode(currentLetterKeyCode);
+//     const currentGuessedLetter = e.key.toUpperCase();
+    
+    
+    
+//     if (indexOfLetter >= 0) {
+//         wordEl.children[indexOfLetter].textContent = e.key;
+//         // if registered letter exists in alphabet
+
+//         // for of loop
+//         for(let letterEl of alphaEl.children) {
+//             if(letterEl.textContent === currentGuessedLetter) {
+//                 letterEl.style.color = "green";
+//             }
+
+//         }
+
+//         msgEl.textContent = `Why yes, there is a '${currentGuessedLetter}' in the word`;
+//         msgBoxEl.style.display = "block";
+
+//     } else if (indexOfLetter < 0) {
+//         console.log("wrong");
+
+//         // 
+
+//         for(let letterEl of alphaEl.children) {
+//             if(letterEl.textContent !== currentGuessedLetter) {
+//                 letterEl.style.color = "red";
+//             }
+
+//         }
+//         // color life red
+//         // lifeEl.style.color = "red";
+
+//         msgEl.textContent = `No, there is no '${currentGuessedLetter}' in the word`;
+//         msgBoxEl.style.display = "block";
+//     }
+// };
