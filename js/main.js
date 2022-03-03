@@ -5,14 +5,15 @@ const msgEl = document.querySelector(".message-box > h3");
 const playAgainEl = document.querySelector(".message-box > button");
 const hintEl = document.querySelector(".title > h3");
 const boxesEl = document.querySelector(".boxes");
+const boxesLettersEl = document.querySelector(".boxes-letters");
 const wordEl = document.querySelector(".word");
 const alphaEl = document.querySelector(".alphabet");
 const letterEl = document.querySelector(".letter");
 const livesEl = document.querySelector(".lives");
 const lifeEl = document.querySelector(".life");
 
-const previousGuesses = new Array;
-const wordArray = new Array;
+const guessedWord = [];
+const previousGuesses = [];
 const maxGuesses = 6;
 let numOfWrongGuesses = 0;
 
@@ -56,39 +57,30 @@ hintEl.innerHTML = winningHint;
 function addBoxes() {
     for(let i = 0; i < winningWord.length-1; i++) {
         createBox();
-    };
-};
+    }
+}
 
 function createBox() {
     const newBox = document.createElement("div");
     // adds boxes class to div that is created
     newBox.classList.add("boxes", "boxes-letters");
     document.querySelector(".word").appendChild(newBox);
-};
+}
 
 addBoxes();
 
 // keyboard down, is the character in the current word (two small functions)
 
-const keyDown = document.addEventListener("keydown", main);
+const keyDown = document.addEventListener("keydown", registerLetter);
 
+// main function
 
-
-function main(e) { 
+function registerLetter(e) { 
     const indexOfLetter = winningWord.indexOf(e.key.toUpperCase());
     const currentLetterKeyCode = e.keyCode;
     const currentLetter = String.fromCharCode(currentLetterKeyCode);
     const currentGuessedLetter = e.key.toUpperCase();
-
     const isGuessed = checkIfGuessed(currentGuessedLetter);
-
-
-    if (isGuessed === true) {
-        msgEl.textContent = `'${currentGuessedLetter}' has already been guessed. Try a different letter`;
-        msgBoxEl.style.display = "block";
-        return;
-    } 
-
     const isLetterPresent = isLetterInWinningWord(currentGuessedLetter);
     const idxOfSameLetters = sameLettersExist(currentGuessedLetter);
 
@@ -99,7 +91,12 @@ function main(e) {
         msgEl.textContent = `'${currentGuessedLetter}' is not a letter`;
         msgBoxEl.style.display = "block";
         return;
-    } else if (isLetterPresent === false) {
+    } else if (isGuessed === true) {
+            msgEl.textContent = `'${currentGuessedLetter}' has already been guessed. Try a different letter`;
+            msgBoxEl.style.display = "block";
+            return;
+        } else if (isLetterPresent === false) {
+        previousGuesses.push(e.key);
         for(let letterEl of alphaEl.children) { 
             if(letterEl.textContent === currentGuessedLetter) {
                 letterEl.style.color = "red";
@@ -109,10 +106,8 @@ function main(e) {
         // // turn letter red for incorrect guess
         msgEl.textContent = `'${currentGuessedLetter}' is not a letter in the word`;
         msgBoxEl.style.display = "block";    
-    } 
-
-
-    if (indexOfLetter >= 0) {
+    } else if (indexOfLetter >= 0) {
+        previousGuesses.push(e.key);
         wordEl.children[indexOfLetter].textContent = e.key;
         // if there are multiple letters
         if (idxOfSameLetters.length > 1) {
@@ -124,13 +119,31 @@ function main(e) {
         }
         msgEl.textContent = `Why yes, there is a '${currentGuessedLetter}' in the word`;
         msgBoxEl.style.display = "block";
+
+        // loop textcontent; concat to guesed word
+        let guessedWord = boxesLettersEl.textContent;
+
+        console.log(guessedWord);
+        // NOT WORKING
+        // Check what letter was stored
+
+        // checkWin(guessedWord);
+    } 
+    
+    if (isGuessed === true) {
+        msgEl.textContent = `'${currentGuessedLetter}' has already been guessed. Try a different letter`;
+        msgBoxEl.style.display = "block";
+        return;
     } 
 } 
 
+// Helper functions
+
 // checks if a letter was already guessed
 function checkIfGuessed(currentGuessedLetter) {
+    // includes
     for(let i = 0; i < previousGuesses.length; i++) {
-        if(currentGuessedLetter === previousGuesses[i]) {
+        if(currentGuessedLetter === previousGuesses[i].toUpperCase()) {
             return true;
         }
     }
@@ -160,24 +173,26 @@ function removeLife() {
     }
 }
 
-// function colorIncorrectLetter(currentGuessedLetter) {
-//     wordEl.children[indexOfLetter].textContent = e.key;
-//     for(let letterEl of alphaEl.children) {
-//             if(letterEl.textContent === currentGuessedLetter) {
-//                 letterEl.style.color = "red";
-//             }
-//     }
-// }
-
-
 function sameLettersExist(letter) {
     const idxOfTwoLetters = [];
     let i = -1;
 
-    while((i = winningWord.indexOf(letter, i+1)) >= 0) idxOfTwoLetters.push(i);
+    while((i = winningWord.indexOf(letter, i+1)) >= 0) idxOfTwoLetters.push(i) ;{
         return idxOfTwoLetters;
+    }
 }
 
+function checkWin(guessedWord) {
+    const checkGuessedWord =  guessedWord.join('');
+    console.log(checkGuessedWord.toUpperCase())
+    if(checkGuessedWord === winningWord) {
+        msgEl.textContent = "You correctly guessed the word!";
+        msgBoxEl.style.display = "block";
+    } else {
+        // IF WORD REACHES MAX LIVES    
+        console.log("no");
+    }
+}
 
 
     // } if (isCharacterALetter(e.key) === true) {
