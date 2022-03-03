@@ -12,9 +12,11 @@ const letterEl = document.querySelector(".letter");
 const livesEl = document.querySelector(".lives");
 const lifeEl = document.querySelector(".life");
 
+
 let guessedWord = [];
 const previousGuesses = [];
 const maxGuesses = 6;
+let charCounter = 0;
 let numOfWrongGuesses = 0;
 
 
@@ -105,9 +107,11 @@ function registerLetter(e) {
     } else if (indexOfLetter >= 0) {
         previousGuesses.push(e.key);
         wordEl.children[indexOfLetter].textContent = e.key;
+        charCounter++;
         // if there are multiple letters
         if (idxOfSameLetters.length > 1) {
             idxOfSameLetters.forEach(letterIdx => wordEl.children[letterIdx].textContent = e.key);
+            charCounter++;
         } for(let letterEl of alphaEl.children) {
             if(letterEl.textContent === currentGuessedLetter) {
                 letterEl.style.color = "green";
@@ -115,29 +119,26 @@ function registerLetter(e) {
         }
         msgEl.textContent = `Why yes, there is a '${currentGuessedLetter}' in the word`;
         msgBoxEl.style.display = "block";
-
-        let guessedWord = wordEl.textContent.replace(/\s/g, '');
-        // removes all white space due to grid
-        console.log(guessedWord.length)
-        // checkForWin(guessedWord);
-
-    } 
-} 
-
-
-function checkForWin() {
-    let finalWord = '';
-    for(i = 0; i < guessedWord.length; i++) {
-        finalWord += wordEl[i];
-        console.log(finalWord)
-    } if (finalWord === guessedWord) {
-        console.log("you got it")
-    } else {
-        console.log("wrong");
     }
+    checkForWin(charCounter);
 }
 
 
+// if a word is shown in the boxes, plus one
+// function correctGuessCounter() {
+//     let charCounter = 0;
+
+
+// }
+
+function checkForWin(charCounter) {
+    if(charCounter === winningWord.length) {
+        msgEl.textContent = 'You Win!';
+        msgBoxEl.style.display = "block";
+    } else {
+        return;
+    }
+}
 
 // Helper functions
 
@@ -269,74 +270,6 @@ function sameLettersExist(letter) {
 
 
 
-
-
-// // index of letter is shown in the string
-// // if index of letter = -1; it's not in the string
-// // if +# = the position of the letter in the string
-// function registerLetter(e) {
-//     console.log(e);
-//     const indexOfLetter = winningWord.indexOf(e.key.toUpperCase());
-//     const currentLetterKeyCode = e.keyCode;
-//     const currentLetter = String.fromCharCode(currentLetterKeyCode);
-//     const currentGuessedLetter = e.key.toUpperCase();
-    
-    
-    
-//     if (indexOfLetter >= 0) {
-//         wordEl.children[indexOfLetter].textContent = e.key;
-//         // if registered letter exists in alphabet
-
-//         // for of loop
-//         for(let letterEl of alphaEl.children) {
-//             if(letterEl.textContent === currentGuessedLetter) {
-//                 letterEl.style.color = "green";
-//             }
-
-//         }
-
-//         msgEl.textContent = `Why yes, there is a '${currentGuessedLetter}' in the word`;
-//         msgBoxEl.style.display = "block";
-
-//     } else if (indexOfLetter < 0) {
-//         console.log("wrong");
-
-//         // 
-
-//         for(let letterEl of alphaEl.children) {
-//             if(letterEl.textContent !== currentGuessedLetter) {
-//                 letterEl.style.color = "red";
-//             }
-
-//         }
-//         // color life red
-//         // lifeEl.style.color = "red";
-
-//         msgEl.textContent = `No, there is no '${currentGuessedLetter}' in the word`;
-//         msgBoxEl.style.display = "block";
-//     }
-// };
-
-
-
-
-
-
-
-
-    // if (isLetterPresent <= maxGuesses) {
-    //     isLetterPresentCounter++;
-    //     // function to colour incorrect letter in alph
-    //     // function to colour one life red
-    //     removeLife();
-    //     if(isLetterPresent === false) {
-    //         removeLife();
-    //     )
-
-
-
-
-
     // function to see if isGuessed is a letter in the winning word
 
 
@@ -370,3 +303,11 @@ function sameLettersExist(letter) {
 //         return false;
 //     }
 // }
+
+
+
+ // removes all white space due to grid
+    // let guessedWord = wordEl.textContent.replace(/\s/g, '');
+    // let guessedWordArray = guessedWord.split('');
+
+    // console.log(guessedWord);
