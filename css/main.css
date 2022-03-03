@@ -50,7 +50,7 @@ h3 {
 
 
 /* Game Board that shows lives*/
-.game-container {
+.lives {
     width: 100%;
     display: flex;
     margin-left: auto;
@@ -103,21 +103,15 @@ h3 {
     color: red;
 } */
 
-.lives {
+.life {
     width: 50px;
     height: 50px;
-    background:white;
+    background:green;
     border: 5px solid black;
     border-radius: 50%;
 }
 
-#lifeOne, #lifeTwo, #lifeThree, #lifeFour, #lifeFive {
-    background: green;
-}
 
-#lifeSix {
-    background: red;
-}
 
 button {
     font-family: 'Bungee Inline', Arial;
@@ -136,3 +130,9 @@ button {
     text-align: center;
 
 }
+
+/* want play again button not to move */
+/* .message-box > button {
+    grid: flex;
+    margin-right: 20px;
+} */

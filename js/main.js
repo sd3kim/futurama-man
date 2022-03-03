@@ -92,104 +92,40 @@ function main(e) {
     const isLetterPresent = isLetterInWinningWord(currentGuessedLetter);
     const idxOfSameLetters = sameLettersExist(currentGuessedLetter);
 
-    // const characterIsALetter = isCharacterALetter(currentLetterKeyCode);
 
     // checks if input is a letter. If not, returns and displays message but no life is lost
+    // colors incorrect letter red
     if ((e.keyCode >= 65 && e.keyCode <= 90) === false) {
         msgEl.textContent = `'${currentGuessedLetter}' is not a letter`;
         msgBoxEl.style.display = "block";
         return;
     } else if (isLetterPresent === false) {
+        for(let letterEl of alphaEl.children) { 
+            if(letterEl.textContent === currentGuessedLetter) {
+                letterEl.style.color = "red";
+            }
+        }
         removeLife();
+        // // turn letter red for incorrect guess
         msgEl.textContent = `'${currentGuessedLetter}' is not a letter in the word`;
-        msgBoxEl.style.display = "block";
+        msgBoxEl.style.display = "block";    
     } 
 
 
     if (indexOfLetter >= 0) {
         wordEl.children[indexOfLetter].textContent = e.key;
-        // if registered letter exists in alphabet
-        if (idxOfSameLetters === true) {
-            for(let element of idxOfSameLetters) {
-                wordEl[idxOfSameLetters].textContent = e.key;
-            }
-        }
-        // for of loop
-        for(let letterEl of alphaEl.children) {
+        // if there are multiple letters
+        if (idxOfSameLetters.length > 1) {
+            idxOfSameLetters.forEach(letterIdx => wordEl.children[letterIdx].textContent = e.key);
+        } for(let letterEl of alphaEl.children) {
             if(letterEl.textContent === currentGuessedLetter) {
                 letterEl.style.color = "green";
             }
-
         }
         msgEl.textContent = `Why yes, there is a '${currentGuessedLetter}' in the word`;
         msgBoxEl.style.display = "block";
     } 
 } 
-
-
-// if(sameLettersExist === true) {
-//     wordEl.children[sameLettersExist].textContent = e.key;
-//     console.log(sameLettersExist);
-// } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // if (isLetterPresent <= maxGuesses) {
-    //     isLetterPresentCounter++;
-    //     // function to colour incorrect letter in alph
-    //     // function to colour one life red
-    //     removeLife();
-    //     if(isLetterPresent === false) {
-    //         removeLife();
-    //     )
-
-
-
-
-
-    // function to see if isGuessed is a letter in the winning word
-
-
-
-    // if(e.keyCode > 64 && e.keyCode < 91) {
-    //     const correctLetter = false;
-    //     const previouslyEnteredLetter = false;
-     
-
-    
-    //     if (previouslyEnteredLetter === true) {
-    //         previousGuesses.push(currentGuessedLetter);
-    //         console.log(previousGuesses);
-
-    //         for (let i = 0; i < wordArray.length; i++) {
-    //             if(currentGuessedLetter === wordArray[i]) {
-    //                 correctLetter = true;
-    //                 wordEl.children[indexOfLetter].textContent = e.key;
-    //             }
-    //             console.log("ok");
-    //         }
-    //     }
-
-    // }
-
-
-// function isCharacterALetter(currentLetterKeyCode) {
-//     if (e.keyCode >= 65 && e.keyCode <= 90) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
 
 // checks if a letter was already guessed
 function checkIfGuessed(currentGuessedLetter) {
@@ -213,9 +149,6 @@ function isLetterInWinningWord(letter) {
 }
 
 function removeLife() {
-    // debugger;
-    // lifeEl.style.backgroundColor = "red";
-    // change name of numOfWrongGuesses
     numOfWrongGuesses++;
     for(let i = 0; i < numOfWrongGuesses; i++) {
         livesEl.children[i].style.backgroundColor = "red";
@@ -226,6 +159,15 @@ function removeLife() {
         }
     }
 }
+
+// function colorIncorrectLetter(currentGuessedLetter) {
+//     wordEl.children[indexOfLetter].textContent = e.key;
+//     for(let letterEl of alphaEl.children) {
+//             if(letterEl.textContent === currentGuessedLetter) {
+//                 letterEl.style.color = "red";
+//             }
+//     }
+// }
 
 
 function sameLettersExist(letter) {
@@ -358,3 +300,57 @@ function sameLettersExist(letter) {
 //         msgBoxEl.style.display = "block";
 //     }
 // };
+
+
+
+
+
+
+
+
+    // if (isLetterPresent <= maxGuesses) {
+    //     isLetterPresentCounter++;
+    //     // function to colour incorrect letter in alph
+    //     // function to colour one life red
+    //     removeLife();
+    //     if(isLetterPresent === false) {
+    //         removeLife();
+    //     )
+
+
+
+
+
+    // function to see if isGuessed is a letter in the winning word
+
+
+
+    // if(e.keyCode > 64 && e.keyCode < 91) {
+    //     const correctLetter = false;
+    //     const previouslyEnteredLetter = false;
+     
+
+    
+    //     if (previouslyEnteredLetter === true) {
+    //         previousGuesses.push(currentGuessedLetter);
+    //         console.log(previousGuesses);
+
+    //         for (let i = 0; i < wordArray.length; i++) {
+    //             if(currentGuessedLetter === wordArray[i]) {
+    //                 correctLetter = true;
+    //                 wordEl.children[indexOfLetter].textContent = e.key;
+    //             }
+    //             console.log("ok");
+    //         }
+    //     }
+
+    // }
+
+
+// function isCharacterALetter(currentLetterKeyCode) {
+//     if (e.keyCode >= 65 && e.keyCode <= 90) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
