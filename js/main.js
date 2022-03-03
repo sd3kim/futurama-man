@@ -12,7 +12,7 @@ const letterEl = document.querySelector(".letter");
 const livesEl = document.querySelector(".lives");
 const lifeEl = document.querySelector(".life");
 
-const guessedWord = [];
+let guessedWord = [];
 const previousGuesses = [];
 const maxGuesses = 6;
 let numOfWrongGuesses = 0;
@@ -41,7 +41,6 @@ const wordBank = [
 ];
 
 // generates a random number between 1 and the length of the wordBank bank to choose which word will be guessed
-
 const winningWord = wordBank[Math.floor(Math.random() * wordBank.length)].word;
 console.log(winningWord); 
 
@@ -70,11 +69,9 @@ function createBox() {
 addBoxes();
 
 // keyboard down, is the character in the current word (two small functions)
-
 const keyDown = document.addEventListener("keydown", registerLetter);
 
 // main function
-
 function registerLetter(e) { 
     const indexOfLetter = winningWord.indexOf(e.key.toUpperCase());
     const currentLetterKeyCode = e.keyCode;
@@ -83,7 +80,6 @@ function registerLetter(e) {
     const isGuessed = checkIfGuessed(currentGuessedLetter);
     const isLetterPresent = isLetterInWinningWord(currentGuessedLetter);
     const idxOfSameLetters = sameLettersExist(currentGuessedLetter);
-
 
     // checks if input is a letter. If not, returns and displays message but no life is lost
     // colors incorrect letter red
@@ -120,28 +116,33 @@ function registerLetter(e) {
         msgEl.textContent = `Why yes, there is a '${currentGuessedLetter}' in the word`;
         msgBoxEl.style.display = "block";
 
-        // loop textcontent; concat to guesed word
-        let guessedWord = boxesLettersEl.textContent;
+        let guessedWord = wordEl.textContent.replace(/\s/g, '');
+        // removes all white space due to grid
+        console.log(guessedWord.length)
+        // checkForWin(guessedWord);
 
-        console.log(guessedWord);
-        // NOT WORKING
-        // Check what letter was stored
-
-        // checkWin(guessedWord);
-    } 
-    
-    if (isGuessed === true) {
-        msgEl.textContent = `'${currentGuessedLetter}' has already been guessed. Try a different letter`;
-        msgBoxEl.style.display = "block";
-        return;
     } 
 } 
+
+
+function checkForWin() {
+    let finalWord = '';
+    for(i = 0; i < guessedWord.length; i++) {
+        finalWord += wordEl[i];
+        console.log(finalWord)
+    } if (finalWord === guessedWord) {
+        console.log("you got it")
+    } else {
+        console.log("wrong");
+    }
+}
+
+
 
 // Helper functions
 
 // checks if a letter was already guessed
 function checkIfGuessed(currentGuessedLetter) {
-    // includes
     for(let i = 0; i < previousGuesses.length; i++) {
         if(currentGuessedLetter === previousGuesses[i].toUpperCase()) {
             return true;
@@ -182,17 +183,17 @@ function sameLettersExist(letter) {
     }
 }
 
-function checkWin(guessedWord) {
-    const checkGuessedWord =  guessedWord.join('');
-    console.log(checkGuessedWord.toUpperCase())
-    if(checkGuessedWord === winningWord) {
-        msgEl.textContent = "You correctly guessed the word!";
-        msgBoxEl.style.display = "block";
-    } else {
-        // IF WORD REACHES MAX LIVES    
-        console.log("no");
-    }
-}
+// function checkWin(guessedWord) {
+//     const checkGuessedWord =  guessedWord.join('');
+//     console.log(checkGuessedWord.toUpperCase())
+//     if(checkGuessedWord === winningWord) {
+//         msgEl.textContent = "You correctly guessed the word!";
+//         msgBoxEl.style.display = "block";
+//     } else {
+//         // IF WORD REACHES MAX LIVES    
+//         console.log("no");
+//     }
+// }
 
 
     // } if (isCharacterALetter(e.key) === true) {
