@@ -12,12 +12,13 @@ const letterEl = document.querySelector(".letter");
 const livesEl = document.querySelector(".lives");
 const lifeEl = document.querySelector(".life");
 
-
-let guessedWord = [];
-const previousGuesses = [];
 const maxGuesses = 6;
-let charCounter = 0;
-let numOfWrongGuesses = 0;
+
+// let guessedWord = [];
+// const state.previousGuesses = [];
+// const maxGuesses = 6;
+// let state.charCounter = 0;
+// let state.numOfWrongGuesses = 0;
 
 
 // Getting words for game
@@ -42,21 +43,34 @@ const wordBank = [
 
 ];
 
-// generates a random number between 1 and the length of the wordBank bank to choose which word will be guessed
-const winningWord = wordBank[Math.floor(Math.random() * wordBank.length)].word;
-console.log(winningWord); 
+const state = {
+    winningWord: null,
+    winningWordIdx: 0, 
+    charCounter: 0,
+    previousGuesses: [],
+    numOfWrongGuesses: 0,
+};
 
-// winningWordIdx gets index of winning word to select corresponding hint
-const winningWordIdx = wordBank.findIndex(x => x.word === winningWord);
 
-// Updates hint corresponding with winning word
-const winningHint = wordBank[winningWordIdx].hint;
-console.log(winningHint);
-hintEl.innerHTML = winningHint;
+function getWinningWordAndHint(){
+    // generates a random number between 1 and the length of the wordBank bank to choose which word will be guessed
+    state.winningWord = wordBank[Math.floor(Math.random() * wordBank.length)].word;
+    
+    // winningWordIdx gets index of winning word to select corresponding hint
+    state.winningWordIdx = wordBank.findIndex(x => x.word === state.winningWord);
+
+    // Updates hint corresponding with winning word
+    state.winningHint = wordBank[state.winningWordIdx].hint;
+    console.log(state.winningHint);
+    hintEl.innerHTML = state.winningHint;
+}
+
+getWinningWordAndHint();
+
 
 // create loop to equate to the number of boxes and length of word
 function addBoxes() {
-    for(let i = 0; i < winningWord.length-1; i++) {
+    for(let i = 0; i < state.winningWord.length-1; i++) {
         createBox();
     }
 }
@@ -75,7 +89,7 @@ const keyDown = document.addEventListener("keydown", registerLetter);
 
 // main function
 function registerLetter(e) { 
-    const indexOfLetter = winningWord.indexOf(e.key.toUpperCase());
+    const indexOfLetter = state.winningWord.indexOf(e.key.toUpperCase());
     const currentLetterKeyCode = e.keyCode;
     const currentLetter = String.fromCharCode(currentLetterKeyCode);
     const currentGuessedLetter = e.key.toUpperCase();
@@ -94,7 +108,7 @@ function registerLetter(e) {
             msgBoxEl.style.display = "block";
             return;
         } else if (isLetterPresent === false) {
-        previousGuesses.push(e.key);
+        state.previousGuesses.push(e.key);
         for(let letterEl of alphaEl.children) { 
             if(letterEl.textContent === currentGuessedLetter) {
                 letterEl.style.color = "red";
@@ -105,13 +119,13 @@ function registerLetter(e) {
         msgEl.textContent = `'${currentGuessedLetter}' is not a letter in the word`;
         msgBoxEl.style.display = "block";    
     } else if (indexOfLetter >= 0) {
-        previousGuesses.push(e.key);
+        state.previousGuesses.push(e.key);
         wordEl.children[indexOfLetter].textContent = e.key;
-        charCounter++;
+        state.charCounter++;
         // if there are multiple letters
         if (idxOfSameLetters.length > 1) {
             idxOfSameLetters.forEach(letterIdx => wordEl.children[letterIdx].textContent = e.key);
-            charCounter++;
+            state.charCounter++;
         } for(let letterEl of alphaEl.children) {
             if(letterEl.textContent === currentGuessedLetter) {
                 letterEl.style.color = "green";
@@ -120,19 +134,19 @@ function registerLetter(e) {
         msgEl.textContent = `Why yes, there is a '${currentGuessedLetter}' in the word`;
         msgBoxEl.style.display = "block";
     }
-    checkForWin(charCounter);
+    checkForWin(state.charCounter);
 }
 
 
 // if a word is shown in the boxes, plus one
 // function correctGuessCounter() {
-//     let charCounter = 0;
+//     let state.charCounter = 0;
 
 
 // }
 
 function checkForWin(charCounter) {
-    if(charCounter === winningWord.length) {
+    if(state.charCounter === state.winningWord.length) {
         msgEl.textContent = 'You Win!';
         msgBoxEl.style.display = "block";
     } else {
@@ -144,8 +158,8 @@ function checkForWin(charCounter) {
 
 // checks if a letter was already guessed
 function checkIfGuessed(currentGuessedLetter) {
-    for(let i = 0; i < previousGuesses.length; i++) {
-        if(currentGuessedLetter === previousGuesses[i].toUpperCase()) {
+    for(let i = 0; i < state.previousGuesses.length; i++) {
+        if(currentGuessedLetter === state.previousGuesses[i].toUpperCase()) {
             return true;
         }
     }
@@ -155,8 +169,8 @@ function checkIfGuessed(currentGuessedLetter) {
 // function to see if a letter is in the winning word
 // if a variable is global, don't need to include it as a param in a function
 function isLetterInWinningWord(letter) {
-    for (let i = 0; i < winningWord.length; i++) {
-        if(winningWord[i] === letter) {
+    for (let i = 0; i < state.winningWord.length; i++) {
+        if(state.winningWord[i] === letter) {
             return true;
         }
     }
@@ -164,10 +178,10 @@ function isLetterInWinningWord(letter) {
 }
 
 function removeLife() {
-    numOfWrongGuesses++;
-    for(let i = 0; i < numOfWrongGuesses; i++) {
+    state.numOfWrongGuesses++;
+    for(let i = 0; i < state.numOfWrongGuesses; i++) {
         livesEl.children[i].style.backgroundColor = "red";
-        if(numOfWrongGuesses > 6) {
+        if(state.numOfWrongGuesses > 6) {
             msgEl.textContent = 'You ran out of lives.';
             msgBoxEl.style.display = "block";
             // quit game
@@ -179,10 +193,18 @@ function sameLettersExist(letter) {
     const idxOfTwoLetters = [];
     let i = -1;
 
-    while((i = winningWord.indexOf(letter, i+1)) >= 0) idxOfTwoLetters.push(i) ;{
+    while((i = state.winningWord.indexOf(letter, i+1)) >= 0) idxOfTwoLetters.push(i) ;{
         return idxOfTwoLetters;
     }
 }
+
+
+
+
+// function init() {
+//     state. 
+// }
+
 
 // function checkWin(guessedWord) {
 //     const checkGuessedWord =  guessedWord.join('');
@@ -281,8 +303,8 @@ function sameLettersExist(letter) {
 
     
     //     if (previouslyEnteredLetter === true) {
-    //         previousGuesses.push(currentGuessedLetter);
-    //         console.log(previousGuesses);
+    //         state.previousGuesses.push(currentGuessedLetter);
+    //         console.log(state.previousGuesses);
 
     //         for (let i = 0; i < wordArray.length; i++) {
     //             if(currentGuessedLetter === wordArray[i]) {
