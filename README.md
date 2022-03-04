@@ -15,7 +15,11 @@ In this version, lives are represented by green circles, with a lost life repres
 
 **Technologies Used**
 
-Javascript, HTML, CSS, Visual Studio Code
+* Javascript (Node.js)
+* HTML
+* CSS (Grid, Flexbox)
+* Chrome DevTools
+* Visual Studio Code
 
 **Getting Started**
 
@@ -31,5 +35,5 @@ If you would like to play again or restart, press the "Play Again" button.
 * Make the game more responsive (for mobile play).
 * Make letters clickable to input letter guess.
 * Include words in word bank that have more than one word.
-    *Ex. Dr. Zoidberg
-    *Ex. Planet Express
+    * Ex. Dr. Zoidberg
+    * Ex. Planet Express
