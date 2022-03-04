@@ -38,3 +38,4 @@ If you would like to play again or restart, press the "Play Again" button.
 * Include words in word bank that have more than one word.
     * Ex. Dr. Zoidberg
     * Ex. Planet Express
+* Animation for when player wins or loses.
