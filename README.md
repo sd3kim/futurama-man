@@ -1,6 +1,6 @@
 # Project-1
 
-**Futurama Man**
+## **Futurama Man**
 
 A simple Browser-based game. 'Futurama Man' is a play on the original Hangman game with a 'Futurama' theme. 
 
@@ -8,12 +8,12 @@ Hangman involves a player guessing a word (represented by a row of dashes) given
 
 In this version, lives are represented by green circles, with a lost life represented by a red circle. The game can be played again with a new word to guess by pressing the "Play Again" button.
 
-**Screenshots**
+### **Screenshots**
 ![Game start](./img/game-start.png "Game - Start")
 ![Game win](./img/game-win.png "Game - Win Condition")
 ![Game lose](./img/game-lose.png "Game - Lose Condition")
 
-**Technologies Used**
+### **Technologies Used**
 
 * Javascript (Node.js)
 * HTML
@@ -21,7 +21,7 @@ In this version, lives are represented by green circles, with a lost life repres
 * Chrome DevTools
 * Visual Studio Code
 
-**Getting Started**
+### **Getting Started**
 
 https://sd3kim.github.io/futurama-man/
 
@@ -29,11 +29,11 @@ To start playing, press a key to make your guess. The game will register the key
 
 If you would like to play again or restart, press the "Play Again" button. 
 
-**Next Steps**
+### **Next Steps**
 
 * Have lost lives represented by a hanged Bender figure (rather than circles to represent lives/lost lives).
 * Make the game more responsive (for mobile play).
-* Optimize code (make smaller, more specific functions).
+* Optimize code (make smaller, more readable functions).
 * Make letters clickable to input letter guess.
 * Include words in word bank that have more than one word.
     * Ex 1. Dr. Zoidberg
