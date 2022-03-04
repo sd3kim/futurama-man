@@ -15,7 +15,7 @@ In this version, lives are represented by green circles, with a lost life repres
 
 **Technologies Used**
 
-Javascript (Node.js), HTML, CSS (Grid, Flexbox), Chrome DevTools, Visual Studio Code
+Javascript, HTML, CSS, Visual Studio Code
 
 **Getting Started**
 
