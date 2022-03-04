@@ -1,6 +1,6 @@
 # Project-1
 
-**Game-title**
+[**Game-title**]
 
 Futurama-man -- a simple Javascript based game; it is a play on the original Hangman game with a 'Futurama' theme. 
 
@@ -8,21 +8,21 @@ Hangman involves a player guessing a word (represented by a row of dashes) given
 
 In this version, lives are represented by green circles, with a lost life represented by a red circle. The game can be played again with a new word to guess by pressing the "Play Again" button.
 
-**Screenshots**
+[**Screenshots**]
 ![Game start](./img/game-start.png "Game - Start")
 ![Game win](./img/game-win.png "Game - Win Condition")
 ![Game lose](./img/game-lose.png "Game - Lose Condition")
 
-**Technologies Used** 
+[**Technologies Used** ]
 Javascript (Node.js), HTML, CSS (Grid, Flexbox), Chrome DevTools, Visual Studio Code
 
-**Getting Started**
+[**Getting Started**]
 
 To start playing, press a key to make your guess. The game will register the key pressed and display if the letter is in the word (will display in the boxes and highlight the correct letter green) or not (will highlight the incorrect letter red and you will lose a life).
 
 If you would like to play again or restart, press the "Play Again" button. 
 
-**Next Steps**
+[**Next Steps**]
 
 * Have lost lives represented by a hanged Bender figure (rather than circles to represent lives/lost lives).
 * Make the game more responsive (for mobile play).
