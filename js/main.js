@@ -74,7 +74,8 @@ function onKeyPress(e) {
         if (idxOfSameLetters.length > 1) {
             idxOfSameLetters.forEach(letterIdx => wordEl.children[letterIdx].textContent = e.key);
             state.charCounter++;
-        } for(let letterEl of alphaEl.children) {
+        } 
+        for(let letterEl of alphaEl.children) {
             if(letterEl.textContent === currentGuessedLetter) {
                 letterEl.style.color = "green";
             }
@@ -178,8 +179,8 @@ function removeLife() {
 function sameLettersExist(letter) {
     const idxOfTwoLetters = [];
     let i = -1;
-    
-    while((i = state.winningWord.indexOf(letter, i+1)) >= 0) idxOfTwoLetters.push(i) ;{
+    while((i = state.winningWord.indexOf(letter, i+1)) >= 0) {
+        idxOfTwoLetters.push(i);
         return idxOfTwoLetters;
     }
 }
