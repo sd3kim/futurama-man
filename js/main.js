@@ -179,8 +179,7 @@ function removeLife() {
 function sameLettersExist(letter) {
     const idxOfTwoLetters = [];
     let i = -1;
-    while((i = state.winningWord.indexOf(letter, i+1)) >= 0) {
-        idxOfTwoLetters.push(i);
+    while((i = state.winningWord.indexOf(letter, i+1)) >= 0) idxOfTwoLetters.push(i); {
         return idxOfTwoLetters;
     }
 }
