@@ -9,6 +9,7 @@ Hangman involves a player guessing a word (represented by a row of dashes) given
 In this version, lives are represented by green circles, with a lost life represented by a red circle. The game can be played again with a new word to guess by pressing the "Play Again" button.
 
 **Screenshots**
+![Game start](./img/game-start.png "Game - Start")
 ![Game win](./img/game-win.png "Game - Win Condition")
 ![Game lose](./img/game-lose.png "Game - Lose Condition")
 
