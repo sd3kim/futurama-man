@@ -13,7 +13,7 @@ const livesEl = document.querySelector(".lives");
 const lifeEl = document.querySelector(".life");
 
 const maxGuesses = 6;
-document.getElementById('restart-button').addEventListener('click', startGame);
+document.getElementById('restart-button').addEventListener('click', init);
 
 const wordBank = [
     {word: "BENDER",
@@ -186,7 +186,7 @@ function sameLettersExist(letter) {
     }
 }
 
-function startGame() {
+function init() {
     state.winningWord = null;
     state.winningWordIdx = 0;
     state.charCounter = 0;
@@ -209,4 +209,4 @@ function startGame() {
     document.addEventListener("keydown", onKeyPress);
 }
 
-startGame();
+init();
