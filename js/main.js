@@ -56,9 +56,6 @@ const state = {
 };
 
 
-
-// keyboard down, is the character in the current word (two small functions)
-// const keyDown = document.addEventListener("keydown", onKeyPress);
 function onKeyPress(e) { 
     const indexOfLetter = state.winningWord.indexOf(e.key.toUpperCase());
     const currentLetterKeyCode = e.keyCode;
@@ -67,8 +64,8 @@ function onKeyPress(e) {
     const isGuessed = checkIfGuessed(currentGuessedLetter);
     const isLetterPresent = isLetterInWinningWord(currentGuessedLetter);
     const idxOfSameLetters = sameLettersExist(currentGuessedLetter);
-    // checks if input is a letter. If not, returns and displays message but no life is lost
-    // colors incorrect letter red
+   
+    // checks if input is a letter, if it the correct letter, and when it is not the correct letter
     if (indexOfLetter >= 0) {
         state.previousGuesses.push(e.key);
         wordEl.children[indexOfLetter].textContent = e.key;
@@ -127,6 +124,7 @@ function addBoxes() {
     }
 }
 
+// creates a new letter box for the winning word
 function createBox() {
     const newBox = document.createElement("div");
     // adds boxes class to div that is created
@@ -134,6 +132,7 @@ function createBox() {
     document.querySelector(".word").appendChild(newBox);
 }
 
+// checks if number of correct characters in box matches the winning word
 function checkForWin(charCounter) {
     if(state.charCounter === state.winningWord.length) {
         msgEl.textContent = 'YOU WIN! You guessed the word correctly! Play again?';
@@ -141,8 +140,6 @@ function checkForWin(charCounter) {
         document.removeEventListener('keydown', onKeyPress);
     }
 }
-
-// Helper functions
 
 // checks if a letter was already guessed
 function checkIfGuessed(currentGuessedLetter) {
@@ -155,7 +152,6 @@ function checkIfGuessed(currentGuessedLetter) {
 }
 
 // function to see if a letter is in the winning word
-// if a variable is global, don't need to include it as a param in a function
 function isLetterInWinningWord(letter) {
     for (let i = 0; i < state.winningWord.length; i++) {
         if(state.winningWord[i] === letter) {
@@ -165,6 +161,7 @@ function isLetterInWinningWord(letter) {
     return false;
 }
 
+// removes a life with incorrect guess
 function removeLife() {
     state.numOfWrongGuesses++;
     for(let i = 0; i < state.numOfWrongGuesses; i++) {
@@ -177,6 +174,7 @@ function removeLife() {
     }
 }
 
+// checks if there are more than one same letters in the winning word
 function sameLettersExist(letter) {
     const idxOfTwoLetters = [];
     let i = -1;
@@ -186,6 +184,7 @@ function sameLettersExist(letter) {
     }
 }
 
+// initalizes the game and resets to default
 function init() {
     state.winningWord = null;
     state.winningWordIdx = 0;
