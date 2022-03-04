@@ -1,4 +1,4 @@
-// Constants
+// constants
 const mainEl = document.querySelector("main");
 const msgBoxEl = document.querySelector(".message-box");
 const msgEl = document.querySelector(".message-box > h3");
