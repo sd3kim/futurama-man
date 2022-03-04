@@ -2,7 +2,7 @@
 const mainEl = document.querySelector("main");
 const msgBoxEl = document.querySelector(".message-box");
 const msgEl = document.querySelector(".message-box > h3");
-const playAgainEl = document.querySelector(".message-box > button");
+const playAgainEl = document.querySelector(".message-box > button")
 const hintEl = document.querySelector(".title > h3");
 const boxesEl = document.querySelector(".boxes");
 const boxesLettersEl = document.querySelector(".boxes-letters");
@@ -28,16 +28,16 @@ const wordBank = [
 
     {word: "LEELA",
     hint: "CAPTAIN OF THE PLANET EXPRESS SHIP"},
-
+    
     {word: "ORANGE",
     hint: "COLOUR OF FRY'S HAIR"},
-
+    
     {word: "SLURM",
     hint: "NAME OF FRY'S FAVOURITE DRINK"},
-
+    
     {word: "MARS",
     hint: "WHAT PLANET DOES AMY'S PARENTS LIVE ON?"},
-
+    
     {word: "NIBBLER",
     hint: "WHAT IS THE NAME OF LEELA'S PET?"}
 
@@ -52,43 +52,11 @@ const state = {
 };
 
 
-function getWinningWordAndHint(){
-    // generates a random number between 1 and the length of the wordBank bank to choose which word will be guessed
-    state.winningWord = wordBank[Math.floor(Math.random() * wordBank.length)].word;
-    
-    // winningWordIdx gets index of winning word to select corresponding hint
-    state.winningWordIdx = wordBank.findIndex(x => x.word === state.winningWord);
-
-    // Updates hint corresponding with winning word
-    state.winningHint = wordBank[state.winningWordIdx].hint;
-    console.log(state.winningHint);
-    hintEl.innerHTML = state.winningHint;
-}
-
-getWinningWordAndHint();
-
-
-// create loop to equate to the number of boxes and length of word
-function addBoxes() {
-    for(let i = 0; i < state.winningWord.length-1; i++) {
-        createBox();
-    }
-}
-
-function createBox() {
-    const newBox = document.createElement("div");
-    // adds boxes class to div that is created
-    newBox.classList.add("boxes", "boxes-letters");
-    document.querySelector(".word").appendChild(newBox);
-}
-
-addBoxes();
 
 // keyboard down, is the character in the current word (two small functions)
-const keyDown = document.addEventListener("keydown", registerLetter);
+// const keyDown = document.addEventListener("keydown", keyIsPressed);
 
-// main function
-function registerLetter(e) { 
+function keyIsPressed(e) { 
     const indexOfLetter = state.winningWord.indexOf(e.key.toUpperCase());
     const currentLetterKeyCode = e.keyCode;
     const currentLetter = String.fromCharCode(currentLetterKeyCode);
@@ -96,29 +64,9 @@ function registerLetter(e) {
     const isGuessed = checkIfGuessed(currentGuessedLetter);
     const isLetterPresent = isLetterInWinningWord(currentGuessedLetter);
     const idxOfSameLetters = sameLettersExist(currentGuessedLetter);
-
     // checks if input is a letter. If not, returns and displays message but no life is lost
     // colors incorrect letter red
-    if ((e.keyCode >= 65 && e.keyCode <= 90) === false) {
-        msgEl.textContent = `'${currentGuessedLetter}' is not a letter`;
-        msgBoxEl.style.display = "block";
-        return;
-    } else if (isGuessed === true) {
-            msgEl.textContent = `'${currentGuessedLetter}' has already been guessed. Try a different letter`;
-            msgBoxEl.style.display = "block";
-            return;
-        } else if (isLetterPresent === false) {
-        state.previousGuesses.push(e.key);
-        for(let letterEl of alphaEl.children) { 
-            if(letterEl.textContent === currentGuessedLetter) {
-                letterEl.style.color = "red";
-            }
-        }
-        removeLife();
-        // // turn letter red for incorrect guess
-        msgEl.textContent = `'${currentGuessedLetter}' is not a letter in the word`;
-        msgBoxEl.style.display = "block";    
-    } else if (indexOfLetter >= 0) {
+    if (indexOfLetter >= 0) {
         state.previousGuesses.push(e.key);
         wordEl.children[indexOfLetter].textContent = e.key;
         state.charCounter++;
@@ -133,22 +81,64 @@ function registerLetter(e) {
         }
         msgEl.textContent = `Why yes, there is a '${currentGuessedLetter}' in the word`;
         msgBoxEl.style.display = "block";
+    } else if ((e.keyCode >= 65 && e.keyCode <= 90) === false) {
+        msgEl.textContent = `'${currentGuessedLetter}' is not a letter`;
+        msgBoxEl.style.display = "block";
+        return;
+    } else if (isGuessed === true) {
+        msgEl.textContent = `'${currentGuessedLetter}' has already been guessed. Try a different letter`;
+        msgBoxEl.style.display = "block";
+        return;
+    } else if (isLetterPresent === false) {
+        state.previousGuesses.push(e.key);
+        for(let letterEl of alphaEl.children) { 
+            if(letterEl.textContent === currentGuessedLetter) {
+                letterEl.style.color = "red";
+            }
+        }
+        msgEl.textContent = `'${currentGuessedLetter}' is not a letter in the word`;
+        msgBoxEl.style.display = "block";
+        removeLife();
+        // // turn letter red for incorrect guess
     }
     checkForWin(state.charCounter);
 }
 
+function getWinningWordAndHint(){
+    // generates a random number between 1 and the length of the wordBank bank to choose which word will be guessed
+    state.winningWord = wordBank[Math.floor(Math.random() * wordBank.length)].word;
+    
+    // winningWordIdx gets index of winning word to select corresponding hint
+    state.winningWordIdx = wordBank.findIndex(x => x.word === state.winningWord);
 
-// if a word is shown in the boxes, plus one
-// function correctGuessCounter() {
-//     let state.charCounter = 0;
+    // Updates hint corresponding with winning word
+    state.winningHint = wordBank[state.winningWordIdx].hint;
+    hintEl.innerHTML = state.winningHint;
+}
+
+// const replay = document.addEventListener("onClick", keyIsPressed);
 
 
-// }
+// create loop to equate to the number of boxes and length of word
+function addBoxes() {
+    document.querySelector('.word').innerHTML = '';
+    for(let i = 0; i < state.winningWord.length; i++) {
+        createBox();
+    }
+}
+
+function createBox() {
+    const newBox = document.createElement("div");
+    // adds boxes class to div that is created
+    newBox.classList.add("boxes", "boxes-letters");
+    document.querySelector(".word").appendChild(newBox);
+}
 
 function checkForWin(charCounter) {
     if(state.charCounter === state.winningWord.length) {
-        msgEl.textContent = 'You Win!';
+        msgEl.textContent = 'You guess the word correctly!';
         msgBoxEl.style.display = "block";
+        document.removeEventListener('keydown', keyIsPressed);
     } else {
         return;
     }
@@ -181,23 +171,47 @@ function removeLife() {
     state.numOfWrongGuesses++;
     for(let i = 0; i < state.numOfWrongGuesses; i++) {
         livesEl.children[i].style.backgroundColor = "red";
-        if(state.numOfWrongGuesses > 6) {
-            msgEl.textContent = 'You ran out of lives.';
-            msgBoxEl.style.display = "block";
-            // quit game
-        }
+    }
+    if(state.numOfWrongGuesses > 5) {
+        msgEl.textContent = 'You ran out of lives. Try again?';
+        msgBoxEl.style.display = "block";
+        document.removeEventListener('keydown', keyIsPressed);
+        // quit game
     }
 }
 
 function sameLettersExist(letter) {
     const idxOfTwoLetters = [];
     let i = -1;
-
+    
     while((i = state.winningWord.indexOf(letter, i+1)) >= 0) idxOfTwoLetters.push(i) ;{
         return idxOfTwoLetters;
     }
 }
 
+function startGame() {
+    state.winningWord = null;
+    state.winningWordIdx = 0;
+    state.charCounter = 0;
+    state.previousGuesses = [];
+    state.numOfWrongGuesses = 0;
+    getWinningWordAndHint();
+    addBoxes();
+
+    for (let letterEl of alphaEl.children) {
+        letterEl.style.color = "black";
+    }
+
+    for(let i = 0; i < livesEl.children.length; i++) {
+        livesEl.children[i].style.background = "green";
+    }
+
+    document.addEventListener("keydown", keyIsPressed);
+}
+
+startGame();
+
+document.getElementById('restart-button').addEventListener('click', startGame);
 
 
 
@@ -235,7 +249,7 @@ function sameLettersExist(letter) {
     
 
 
-// function findAndRegisterLetters(e) {
+// function findAndkeyIsPresseds(e) {
 //     for(let i = 0; i < winningWord.length; i++) {
 //         if(e.key.toUpperCase() === winningWord[i]) {
 
