@@ -13,34 +13,38 @@ const livesEl = document.querySelector(".lives");
 const lifeEl = document.querySelector(".life");
 
 const maxGuesses = 6;
+document.getElementById('restart-button').addEventListener('click', startGame);
 
-// let guessedWord = [];
-// const state.previousGuesses = [];
-// const maxGuesses = 6;
-// let state.charCounter = 0;
-// let state.numOfWrongGuesses = 0;
-
-
-// Getting words for game
 const wordBank = [
     {word: "BENDER",
-    hint: "CHEIF OF PLANET EXPRESS"},
+    hint: "WHO IS THE CHEIF OF PLANET EXPRESS"},
 
     {word: "LEELA",
-    hint: "CAPTAIN OF THE PLANET EXPRESS SHIP"},
+    hint: "WHO IS THE CAPTAIN OF THE PLANET EXPRESS SHIP"},
     
-    {word: "ORANGE",
-    hint: "COLOUR OF FRY'S HAIR"},
+    {word: "PURPLE",
+    hint: "WHAT IS THE COLOUR OF LEELA'S HAIR?"},
     
     {word: "SLURM",
-    hint: "NAME OF FRY'S FAVOURITE DRINK"},
+    hint: "WHAT IS THE NAME OF FRY'S FAVOURITE DRINK?"},
     
     {word: "MARS",
     hint: "WHAT PLANET DOES AMY'S PARENTS LIVE ON?"},
     
     {word: "NIBBLER",
-    hint: "WHAT IS THE NAME OF LEELA'S PET?"}
+    hint: "WHAT IS THE NAME OF LEELA'S PET?"},
 
+    {word: "ZOIDBERG",
+    hint: "WHAT IS THE NAME OF THE DOCTOR WORKING AT PLANET EXPRESS?"},
+
+    {word: "SEYMOUR",
+    hint: "WHAT IS THE NAME OF FRY'S DOG?"},
+
+    {word: "YANCY",
+    hint: "WHAT IS THE NAME OF FRY'S BROTHER?"},
+    
+    {word: "FARNSWORTH",
+    hint: "WHAT IS THE LAST NAME OF CHIEF EXECUTIVE OFFICER OF PLANET EXPRESS?"}
 ];
 
 const state = {
@@ -54,9 +58,8 @@ const state = {
 
 
 // keyboard down, is the character in the current word (two small functions)
-// const keyDown = document.addEventListener("keydown", keyIsPressed);
-
-function keyIsPressed(e) { 
+// const keyDown = document.addEventListener("keydown", onKeyPress);
+function onKeyPress(e) { 
     const indexOfLetter = state.winningWord.indexOf(e.key.toUpperCase());
     const currentLetterKeyCode = e.keyCode;
     const currentLetter = String.fromCharCode(currentLetterKeyCode);
@@ -116,9 +119,6 @@ function getWinningWordAndHint(){
     hintEl.innerHTML = state.winningHint;
 }
 
-// const replay = document.addEventListener("onClick", keyIsPressed);
-
-
 // create loop to equate to the number of boxes and length of word
 function addBoxes() {
     document.querySelector('.word').innerHTML = '';
@@ -136,11 +136,9 @@ function createBox() {
 
 function checkForWin(charCounter) {
     if(state.charCounter === state.winningWord.length) {
-        msgEl.textContent = 'You guess the word correctly!';
+        msgEl.textContent = 'YOU WIN! You guessed the word correctly! Play again?';
         msgBoxEl.style.display = "block";
-        document.removeEventListener('keydown', keyIsPressed);
-    } else {
-        return;
+        document.removeEventListener('keydown', onKeyPress);
     }
 }
 
@@ -173,10 +171,9 @@ function removeLife() {
         livesEl.children[i].style.backgroundColor = "red";
     }
     if(state.numOfWrongGuesses > 5) {
-        msgEl.textContent = 'You ran out of lives. Try again?';
+        msgEl.textContent = 'Sorry, you ran out of lives. Play again?';
         msgBoxEl.style.display = "block";
-        document.removeEventListener('keydown', keyIsPressed);
-        // quit game
+        document.removeEventListener('keydown', onKeyPress);
     }
 }
 
@@ -195,6 +192,9 @@ function startGame() {
     state.charCounter = 0;
     state.previousGuesses = [];
     state.numOfWrongGuesses = 0;
+    
+    msgEl.textContent = "Press a key to guess the word";
+
     getWinningWordAndHint();
     addBoxes();
 
@@ -206,144 +206,7 @@ function startGame() {
         livesEl.children[i].style.background = "green";
     }
 
-    document.addEventListener("keydown", keyIsPressed);
+    document.addEventListener("keydown", onKeyPress);
 }
 
 startGame();
-
-document.getElementById('restart-button').addEventListener('click', startGame);
-
-
-
-// function init() {
-//     state. 
-// }
-
-
-// function checkWin(guessedWord) {
-//     const checkGuessedWord =  guessedWord.join('');
-//     console.log(checkGuessedWord.toUpperCase())
-//     if(checkGuessedWord === winningWord) {
-//         msgEl.textContent = "You correctly guessed the word!";
-//         msgBoxEl.style.display = "block";
-//     } else {
-//         // IF WORD REACHES MAX LIVES    
-//         console.log("no");
-//     }
-// }
-
-
-    // } if (isCharacterALetter(e.key) === true) {
-    //     console.log("NOT A LETTER");
-    //     msgEl.textContent = `'${currentGuessedLetter}' is not a letter`;
-    //     msgBoxEl.style.display = "block";
-    //     } else if(indexOfLetter >= 0) {
-    //     findLettersInWinningWord;
-    // }
-
-
-
-
-
-
-    
-
-
-// function findAndkeyIsPresseds(e) {
-//     for(let i = 0; i < winningWord.length; i++) {
-//         if(e.key.toUpperCase() === winningWord[i]) {
-
-//         }
-//     }
-// }
-
-// playAgainEl.addEventListener("click", init);
-
-// function init() {
-//     msgEl.textContent = "";
-//     msgBoxEl.style.display = "none";
-// }
-
-
-// function render() {
-
-// }
-
-
-
-// const correctLetter = [];
-// function previouslyGuessed(e){
-//     for(let i = 0; i < )
-// }
-
-
-    // for(let i = 0; i < winningWord.length; i++) {
-    //     if(winningWord.includes(currentLetter)) {
-    //         // find correct position
-    //         boxesEl.innerHTML = currentLetter;
-    //     }
-    //     else {
-    //         return;
-    //     }
-    // }
-
-// }
-
-
-// TO-DO:
-// 1) get letter to appear in correct box [DONE]
-// 2) change colour of letter when correct or incorrect letter is guessed
-// 3) remove life (change colour of circle to red) if incorrect letter is guessed
-// 4) display winning or losing message
-// 5) get functioning reset button (render function)
-// create init function
-
-
-
-
-
-
-
-
-
-    // function to see if isGuessed is a letter in the winning word
-
-
-
-    // if(e.keyCode > 64 && e.keyCode < 91) {
-    //     const correctLetter = false;
-    //     const previouslyEnteredLetter = false;
-     
-
-    
-    //     if (previouslyEnteredLetter === true) {
-    //         state.previousGuesses.push(currentGuessedLetter);
-    //         console.log(state.previousGuesses);
-
-    //         for (let i = 0; i < wordArray.length; i++) {
-    //             if(currentGuessedLetter === wordArray[i]) {
-    //                 correctLetter = true;
-    //                 wordEl.children[indexOfLetter].textContent = e.key;
-    //             }
-    //             console.log("ok");
-    //         }
-    //     }
-
-    // }
-
-
-// function isCharacterALetter(currentLetterKeyCode) {
-//     if (e.keyCode >= 65 && e.keyCode <= 90) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
-
-
-
- // removes all white space due to grid
-    // let guessedWord = wordEl.textContent.replace(/\s/g, '');
-    // let guessedWordArray = guessedWord.split('');
-
-    // console.log(guessedWord);
