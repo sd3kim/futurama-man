@@ -19,6 +19,8 @@ Javascript (Node.js), HTML, CSS (Grid, Flexbox), Chrome DevTools, Visual Studio 
 
 **Getting Started**
 
+https://sd3kim.github.io/futurama-man/
+
 To start playing, press a key to make your guess. The game will register the key pressed and display if the letter is in the word (will display in the boxes and highlight the correct letter green) or not (will highlight the incorrect letter red and you will lose a life).
 
 If you would like to play again or restart, press the "Play Again" button. 
