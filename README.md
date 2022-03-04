@@ -36,5 +36,6 @@ If you would like to play again or restart, press the "Play Again" button.
 * Optimize code (make smaller, more specific functions).
 * Make letters clickable to input letter guess.
 * Include words in word bank that have more than one word.
-    * Ex. Dr. Zoidberg
-    * Ex. Planet Express
+    * Ex 1. Dr. Zoidberg
+    * Ex 2. Planet Express
+* Animation for when player wins or loses.
