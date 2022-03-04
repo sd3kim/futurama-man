@@ -99,7 +99,6 @@ function onKeyPress(e) {
         msgEl.textContent = `'${currentGuessedLetter}' is not a letter in the word`;
         msgBoxEl.style.display = "block";
         removeLife();
-        // // turn letter red for incorrect guess
     }
     checkForWin(state.charCounter);
 }
