@@ -1,8 +1,8 @@
 # Project-1
 
-**Futurama-man**
+**Futurama Man**
 
-A simple Browser-based game. It is a play on the original Hangman game with a 'Futurama' theme. 
+A simple Browser-based game. 'Futurama Man' is a play on the original Hangman game with a 'Futurama' theme. 
 
 Hangman involves a player guessing a word (represented by a row of dashes) given a hint. The player will guess letter by letter, with correct a letter showing in the dashes, and an incorrect letter removing a life. If the player does not guess the word correctly within six guesses, the game is over and the player has lost. 
 
