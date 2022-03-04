@@ -55,7 +55,6 @@ const state = {
     numOfWrongGuesses: 0,
 };
 
-
 function onKeyPress(e) { 
     const indexOfLetter = state.winningWord.indexOf(e.key.toUpperCase());
     const currentLetterKeyCode = e.keyCode;
