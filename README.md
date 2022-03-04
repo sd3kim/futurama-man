@@ -33,6 +33,7 @@ If you would like to play again or restart, press the "Play Again" button.
 
 * Have lost lives represented by a hanged Bender figure (rather than circles to represent lives/lost lives).
 * Make the game more responsive (for mobile play).
+* Optimize code (make smaller, more specific functions).
 * Make letters clickable to input letter guess.
 * Include words in word bank that have more than one word.
     * Ex. Dr. Zoidberg
