@@ -1,127 +1,118 @@
 body {
-    height: 100vh;
-    width: 100vw;
-    background-image: url("https://i.imgur.com/ideNviq.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    font-family: 'Bungee Inline', Arial;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://i.imgur.com/ideNviq.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  font-family: "Bungee Inline", Arial;
 }
 
 main {
-    display: grid;
-    grid-template-columns: repeat(3, 2fr);
-    grid-template-rows: repeat(6, 2fr);
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: repeat(6, 2fr);
 
-    grid-template-areas:
-        "h h h"
-        "w w w"
-        ". m ."
-        ". a ."
-        ". . ."
-        "g g g";
-
+  grid-template-areas:
+    "h h h"
+    "w w w"
+    ". m ."
+    ". a ."
+    ". . ."
+    "g g g";
 }
 
 .title {
-    display: grid;
-    grid-area: h;
+  display: grid;
+  grid-area: h;
 }
 
 h1 {
-    text-align: center;
-    font-size: 50px;
-    margin: 10px;
+  text-align: center;
+  font-size: 50px;
+  margin: 10px;
 }
 
 h2 {
-    text-align: center;
-    font-size: 30px;
-    margin: 5px 5px 0px 5px;
-    padding: 20px 20px 0px 20px;
+  text-align: center;
+  font-size: 30px;
+  margin: 5px 5px 0px 5px;
+  padding: 20px 20px 0px 20px;
 }
 
 h3 {
-    text-align: center;
-    font-size: 20;
-    margin: 5px;
+  text-align: center;
+  font-size: 20;
+  margin: 5px;
 }
-
 
 /* Game Board that shows lives*/
 .lives {
-    width: 100%;
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;    
-    flex-direction: row;
-    grid-area: g;
-    align-items: center;
-    justify-content: center;
-
-} 
+  width: 100%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: row;
+  grid-area: g;
+  align-items: center;
+  justify-content: center;
+}
 
 .boxes {
-    width: 50px;
-    height: 50px;
-    background:white;
-    border: 5px solid black;
+  width: 50px;
+  height: 50px;
+  background: white;
+  border: 5px solid black;
 }
 
 .word {
-    display: flex;
-    grid-area: w;
-    align-items: center;
-    justify-content: center;
-
+  display: flex;
+  grid-area: w;
+  align-items: center;
+  justify-content: center;
 }
 
 .word > div {
-    font-size: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(255, 255, 255);
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
 }
 
-
 .alphabet {
-    grid-area: a;
-    background-color: rgb(255, 255, 255);
-    font-size: 4vh;
-    height: 10vh;
-    opacity: 0.7;
-    margin-left: auto;
-    margin-right: auto;  
-    align-self: center;
-    text-align: center;
+  grid-area: a;
+  background-color: rgb(255, 255, 255);
+  font-size: 4vh;
+  height: 10vh;
+  opacity: 0.7;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  text-align: center;
 }
 
 .life {
-    width: 50px;
-    height: 50px;
-    background:green;
-    border: 5px solid black;
-    border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: green;
+  border: 5px solid black;
+  border-radius: 50%;
 }
 
-
-
 button {
-    font-family: 'Bungee Inline', Arial;
-    border-radius: 12px;
-
+  font-family: "Bungee Inline", Arial;
+  border-radius: 12px;
 }
 
 .message-box > h3 {
-    display: grid;
-    background-color: white;
-    opacity: 0.8;
-    width: 40vw;
-    margin-left: auto;
-    margin-right: auto;  
-    align-self: center;
-    text-align: center;
-    padding: 10px;
-
+  display: grid;
+  background-color: white;
+  opacity: 0.8;
+  width: 40vw;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  text-align: center;
+  padding: 10px;
 }
