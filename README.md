@@ -1,6 +1,4 @@
-# Project-1
-
-## **Futurama Man**
+# **Futurama Man**
 
 A simple Browser-based game. 'Futurama Man' is a play on the original Hangman game with a 'Futurama' theme. 
 
